@@ -20,8 +20,11 @@ class NetworkManager: ObservableObject {
                     let decorder = JSONDecoder()
                     if let safeData = data {
                         do {
-                           let results = try decorder.decode(Results.self, from: safeData)
-                            self.post = results.hits
+                            let results = try decorder.decode(Results.self, from: safeData)
+                            DispatchQueue.main.async {
+                                self.post = results.hits
+                                
+                            }
                         } catch {
                             print(error)
                         }

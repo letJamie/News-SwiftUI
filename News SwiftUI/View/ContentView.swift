@@ -17,12 +17,20 @@ struct ContentView: View {
         NavigationView {
             
             List(networkManager.post) { post in
-                Text(post.title)
                 
+                NavigationLink(destination: DetailView(url: post.url)) {
+                    HStack {
+                        Text(String(post.points))
+                        Text(post.title)
+                    }
+                }
             }
                 
                 
             .navigationBarTitle("NEWS")
+        }
+        .onAppear {
+            self.networkManager.fetchData()
         }
     }
 }
